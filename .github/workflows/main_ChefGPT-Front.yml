@@ -22,15 +22,15 @@ jobs:
     - name: Log in to registry
       uses: docker/login-action@v2
       with:
-        registry: https://mcr.microsoft.com/
-        username: ${{ secrets.AzureAppService_ContainerUsername_6a0605d964df4c17a8c1634bbc95e451 }}
-        password: ${{ secrets.AzureAppService_ContainerPassword_1481edcfd66947e1b375e2301a3684d6 }}
+        registry: https://ghcr.io/
+        username: ${{ secrets.AzureAppService_ContainerUsername_232f315ba4c644f2b360daaa3bd3fe83 }}
+        password: ${{ secrets.AzureAppService_ContainerPassword_22eed70e02a6450c8889a90fd36c1d00 }}
 
     - name: Build and push container image to registry
       uses: docker/build-push-action@v3
       with:
         push: true
-        tags: mcr.microsoft.com/${{ secrets.AzureAppService_ContainerUsername_6a0605d964df4c17a8c1634bbc95e451 }}/chefgpt:${{ github.sha }}
+        tags: ghcr.io/${{ secrets.AzureAppService_ContainerUsername_232f315ba4c644f2b360daaa3bd3fe83 }}/digitalidf/chefgpt:${{ github.sha }}
         file: ./Dockerfile
 
   deploy:
@@ -47,5 +47,5 @@ jobs:
       with:
         app-name: 'ChefGPT-Front'
         slot-name: 'production'
-        publish-profile: ${{ secrets.AzureAppService_PublishProfile_b0f0ac09af784fc7970f3a34de42bbe8 }}
-        images: 'mcr.microsoft.com/${{ secrets.AzureAppService_ContainerUsername_6a0605d964df4c17a8c1634bbc95e451 }}/chefgpt:${{ github.sha }}'
+        publish-profile: ${{ secrets.AzureAppService_PublishProfile_d0ff5f3d36c047cbb7897c0a056fbd43 }}
+        images: 'ghcr.io/${{ secrets.AzureAppService_ContainerUsername_232f315ba4c644f2b360daaa3bd3fe83 }}/digitalidf/chefgpt:${{ github.sha }}'
